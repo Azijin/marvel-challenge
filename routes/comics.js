@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 
-const urlApiMarvel = "https://lereacteur-marvel-api.herokuapp.com";
+const urlApiMarvel = process.env.MARVEL_API_URL;
 
 router.get("/comics", async (req, res) => {
   try {
