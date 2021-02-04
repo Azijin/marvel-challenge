@@ -18,9 +18,11 @@ app.use(cors());
 
 const userRoutes = require("./routes/user");
 const comicsRoutes = require("./routes/comics");
+const charactersRouters = require("./routes/characters");
 
 app.use(userRoutes);
 app.use(comicsRoutes);
+app.use(charactersRouters);
 
 app.all("*", (req, res) => {
   res.status(404).json({ message: "No page found" });
