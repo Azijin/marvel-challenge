@@ -13,7 +13,6 @@ router.get("/characters", async (req, res) => {
     const callApiMarvel = await axios.get(
       `${urlApiMarvel}/characters?apiKey=${apiKey}&name=${name}&limit=${limit}&skip=${skip}`
     );
-    console.log(callApiMarvel);
     if (callApiMarvel.status === 200) {
       if (callApiMarvel.data.results.length === 0) {
         res.status(404).json({ message: "No character found" });
