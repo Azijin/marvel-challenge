@@ -17,8 +17,10 @@ app.use(formidable());
 app.use(cors());
 
 const userRoutes = require("./routes/user");
+const comicsRoutes = require("./routes/comics");
 
 app.use(userRoutes);
+app.use(comicsRoutes);
 
 app.all("*", (req, res) => {
   res.status(404).json({ message: "No page found" });
