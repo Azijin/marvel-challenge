@@ -12,10 +12,7 @@ const User = mongoose.model("User", {
       unique: true,
       type: String,
     },
-    phone: {
-      unique: true,
-      type: String,
-    },
+    phone: String,
     avatar: { type: mongoose.Schema.Types.Mixed, default: {} },
     city: String,
     country: String,
