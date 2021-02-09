@@ -4,6 +4,10 @@ const cors = require("cors");
 
 require("dotenv").config();
 
+const app = express();
+app.use(formidable());
+app.use(cors());
+
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -11,10 +15,6 @@ mongoose.connect(process.env.MONGODB_URI, {
   useCreateIndex: true,
 });
 mongoose.set("debug", true);
-
-const app = express();
-app.use(formidable());
-app.use(cors());
 
 const userRoutes = require("./routes/user");
 const comicsRoutes = require("./routes/comics");
