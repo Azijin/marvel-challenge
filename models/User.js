@@ -18,7 +18,10 @@ const User = mongoose.model("User", {
     country: String,
     adress: String,
     postalCode: Number,
-    favorites: Array,
+    favorites: {
+      comics: Array,
+      characters: Array,
+    },
   },
   token: String,
   hash: String,
