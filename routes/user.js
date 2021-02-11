@@ -105,7 +105,15 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post(
+router.get("/get-user", isAuthenticated, (req, res) => {
+  try {
+    res.status(200).json(req.user.account);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.put(
   "/setting/profil",
   isAuthenticated,
   isEmailRegistered,
@@ -145,11 +153,4 @@ router.post(
   }
 );
 
-router.post("/get-user", isAuthenticated, (req, res) => {
-  try {
-    res.status(200).json(req.user.account);
-  } catch (error) {
-    console.log(error);
-  }
-});
 module.exports = router;
