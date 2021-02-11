@@ -53,6 +53,7 @@ router.post("/signup", isEmailRegistered, async (req, res) => {
             message: `Your account has been created.Thank you for signing up ${username}`,
             token: newUser.token,
             id: newUser._id,
+            account: newUser.account,
           });
         }
       }
@@ -80,7 +81,7 @@ router.post("/login", async (req, res) => {
         if (!user) {
           res
             .status(400)
-            .json({ message: "No account found with username or email" });
+            .json({ message: "No account found with this username or email" });
         } else {
           const checkPassword = SHA256(password + user.salt).toString(
             encBase64
@@ -93,6 +94,7 @@ router.post("/login", async (req, res) => {
             res.status(200).json({
               message: `Welcome back ${user.account.username}`,
               token: user.token,
+              account: user.account,
             });
           }
         }
