@@ -60,7 +60,7 @@ router.post("/signup", isEmailRegistered, async (req, res) => {
     }
     res.status(200).json({ message: "signup" });
   } catch (error) {
-    console.log(error.message);
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -101,7 +101,7 @@ router.post("/login", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -130,7 +130,6 @@ router.put(
           updateAccount[key] = user.account[key];
         }
       });
-
       const userUpdated = await User.findByIdAndUpdate(
         req.user.id,
         { $set: { account: updateAccount } },
@@ -140,7 +139,12 @@ router.put(
           useFindAndModify: false,
         }
       );
-
+      if (req.fields.favorites) {
+        if (req.fields.favorites) {
+          await userUpdated.markModified("favorites.comics");
+          await userUpdated.markModified("favorites.characters");
+        }
+      }
       await userUpdated.save();
 
       res.status(200).json({
@@ -149,6 +153,7 @@ router.put(
       });
     } catch (error) {
       console.log(error);
+      res.status(400).json({ error: error.message });
     }
   }
 );
